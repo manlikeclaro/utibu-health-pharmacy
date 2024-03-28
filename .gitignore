@@ -1,0 +1,23 @@
+# Virtual environment
+.venv/
+.env
+*.env
+
+# Database files
+db.sqlite3
+
+# Ignore Django migration files
+**/migrations/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# IDE and editor-specific files
+.vscode/
+.idea/
+
+# Backup and temporary files
+*~
+*.swp
+.DS_Store
