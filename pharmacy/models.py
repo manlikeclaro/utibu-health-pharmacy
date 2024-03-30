@@ -1,13 +1,22 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 
 
 # Create your models here.
 class Medication(models.Model):
     name = models.CharField(max_length=100)
+    image = models.CharField(max_length=100)
     description = models.TextField()
+    short_description = models.TextField(default="")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=None)
     stock_quantity = models.IntegerField(default=0)
+    slug = models.SlugField(default="", null=False, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        self.short_description = self.description[:100]
+        super().save()
 
     class Meta:
         verbose_name_plural = "Medication"

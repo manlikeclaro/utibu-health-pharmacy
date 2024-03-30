@@ -1,28 +1,64 @@
-<!doctype html>
-<html lang="en">
+{% extends 'pharmacy/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+{% block title %}
+    Confirmation
+{% endblock %}
 
-<body>
-<h1>Thank you for the order!</h1>
-<h2>Orders List</h2>
-{% for order in orders %}
-    <ul>
-        <li>
-            <h4>{{ order.id }} - {{ order.medication }}</h4>
-            <p>Quantity: {{ order.quantity }} - Price: £{{ order.medication_price }}</p>
-            <p>Total Price: £{{ order.total_price }}</p>
-        </li>
-    </ul>
-{% empty %}
+{% block content %}
 
-{% endfor %}
-</body>
+    {#    {% include 'pharmacy/sections/breadcrumbs.html' %}#}
+    <!-- Breadcrumbs -->
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0"><a href="{% url 'home' %}">Home</a> <span class="mx-2 mb-0">/</span> <strong
+                        class="text-black">Confirmation</strong></div>
+            </div>
+        </div>
+    </div> <!-- End Breadcrumbs -->
 
-</html>
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <span class="icon-check_circle display-3 text-success"></span>
+                    <h2 class="display-3 text-black">Thank you!</h2>
+                    <p class="lead mb-5">You order was successfuly completed.</p>
+                    <p><a href="{% url 'store' %}" class="btn btn-md height-auto px-4 py-3 btn-primary">
+                        Back to store</a></p>
+                </div>
+                <div>
+                    <h2 class="h3 mb-3 text-black">Orders List</h2>
+                    <div class="p-3 p-lg-5 ">
+                        <table class="table site-block-order-table mb-5">
+                            <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Medication</th>
+                                <th>Quantity</th>
+                                <th>Order Date</th>
+                                <th>Price</th>
+                                <th>Total Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.id }}</td>
+                                    <td>{{ order.medication }}</td>
+                                    <td>{{ order.quantity }}</td>
+                                    <td>{{ order.order_date }}</td>
+                                    <td>£{{ order.medication_price }}</td>
+                                    <td>£{{ order.total_price }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

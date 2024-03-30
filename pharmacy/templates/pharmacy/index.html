@@ -1,20 +1,62 @@
-<!doctype html>
-<html lang="en">
+{% extends 'pharmacy/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+{% block title %}
 
-<body>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Place Order</button>
-</form>
-</body>
+{% endblock %}
 
-</html>
+{% block content %}
+    {#    <form action="" method="post">#}
+    {#        {% csrf_token %}#}
+    {#        {{ form }}#}
+    {#        <button type="submit">Place Order</button>#}
+    {#    </form>#}
+
+    <div class="site-blocks-cover" style="background-image: url('{% static 'phamacy/' %}images/hero_2.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
+                    <div class="site-block-cover-content text-center">
+                        <h2 class="sub-title">Effective Medicine For Everybody!</h2>
+                        <h1 class="">Welcome To Utibu Health</h1>
+                        <p><a href="{% url 'store' %}" class="btn btn-primary px-5 py-3">Shop Now</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+
+            <div class="row">
+                <div class="title-section text-center col-12">
+                    <h2 class="text-uppercase">Popular Products</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-sm-6 col-lg-4 text-center item mb-4">
+                        <span class="tag">Sale</span>
+                        <a href="{% url 'store-item' product.slug %}">
+                            <img src="{% static 'phamacy/images/' %}{{ product.image }}" alt="{{ product.name }}"></a>
+                        <h3 class="text-dark"><a href="{% url 'store-item' product.slug %}">{{ product.name }}</a></h3>
+                        <p class="price">
+                            {#                            <del>95.00</del> &mdash; $55.00#}
+                            £{{ product.price }}
+                        </p>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <a href="{% url 'store' %}" class="btn btn-primary px-4 py-3">View All Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

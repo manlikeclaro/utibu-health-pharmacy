@@ -1,0 +1,75 @@
+{% extends 'pharmacy/base.html' %}
+{% load static %}
+
+{% block title %}
+    Store
+{% endblock %}
+
+{% block content %}
+
+    <!-- Breadcrumbs -->
+    <div class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-0"><a href="{% url 'home' %}">Home</a> <span class="mx-2 mb-0">/</span>
+                    <strong class="text-black">Store</strong></div>
+            </div>
+        </div>
+    </div> <!-- End Breadcrumbs -->
+
+    <div class="site-section">
+        <div class="container">
+
+            <div class="row">
+                <div class="title-section text-center col-12">
+                    <h2 class="text-uppercase">All Store Products</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for product in page_object %}
+                    <div class="col-sm-6 col-lg-4 text-center item mb-4">
+                        {#                        <span class="tag">Sale</span>#}
+                        <a href="{% url 'store-item' product.slug %}"> <img
+                                src="{% static 'phamacy/images/' %}{{ product.image }}" alt="Image"></a>
+                        <h3 class="text-dark"><a href="{% url 'store-item' product.slug %}">{{ product.name }}</a></h3>
+                        <p class="price">
+                            {#                            <del>95.00</del> &mdash; $55.00#}
+                            £{{ product.price }}
+                        </p>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    <div class="site-block-27">
+                        <ul>
+                            {% if page_object.has_previous %}
+                                <li><a href="?page=1">&lt;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&lt;</span></li>
+                            {% endif %}
+
+                            {% for num in page_object.paginator.page_range %}
+                                {% if page_object.number == num %}
+                                    <li class="active"><span>{{ num }}</span></li>
+                                {% else %}
+                                    <li><a href="?page={{ num }}">{{ num }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_object.has_next %}
+                                <li><a href="?page={{ page_object.next_page_number }}">&gt;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&gt;</span></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

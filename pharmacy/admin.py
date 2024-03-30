@@ -6,7 +6,8 @@ from pharmacy.models import Medication, Customer, Order, FakeOrder
 # Register your models here.
 @admin.register(Medication)
 class MedicationAdmin(admin.ModelAdmin):
-    list_display = ("name", "description", "stock_quantity")
+    list_display = ("name", "short_description", "stock_quantity")
+    readonly_fields = ("slug", "short_description")
 
 
 @admin.register(Customer)
