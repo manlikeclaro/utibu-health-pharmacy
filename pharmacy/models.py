@@ -34,7 +34,24 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         self.price = self.medication.price * self.quantity
-        super().save(*args, **kwargs)
+        if self.medication.stock_quantity >= self.quantity:
+            self.medication.stock_quantity -= self.quantity
+        super().save()
 
     def __str__(self):
         return f"{self.customer.user.username} - {self.medication.name}"
+
+
+class FakeOrder(models.Model):
+    medication = models.CharField(max_length=100)
+    medication_price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.IntegerField(default=1)
+    order_date = models.DateTimeField(auto_now_add=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=None, editable=False)
+
+    def save(self, *args, **kwargs):
+        self.total_price = self.medication_price * self.quantity
+        super().save()
+
+    def __str__(self):
+        return f"{self.medication}"

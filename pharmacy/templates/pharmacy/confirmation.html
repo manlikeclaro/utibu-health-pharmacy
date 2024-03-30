@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+<h1>Thank you for the order!</h1>
+<h2>Orders List</h2>
+{% for order in orders %}
+    <ul>
+        <li>
+            <h4>{{ order.id }} - {{ order.medication }}</h4>
+            <p>Quantity: {{ order.quantity }} - Price: £{{ order.medication_price }}</p>
+            <p>Total Price: £{{ order.total_price }}</p>
+        </li>
+    </ul>
+{% empty %}
+
+{% endfor %}
+</body>
+
+</html>
