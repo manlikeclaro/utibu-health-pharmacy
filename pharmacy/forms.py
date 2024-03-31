@@ -1,37 +1,34 @@
 from django import forms
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 
 from pharmacy.models import FakeOrder
 
 
-class FakeOrderModelForm(forms.ModelForm):
+class FakeOrderForm(forms.ModelForm):
     class Meta:
         model = FakeOrder
-        # fields = ('',)
-        exclude = ('order_date', 'total_price')
+        fields = ['medication', 'quantity']
 
     def __init__(self, *args, **kwargs):
-        product = kwargs.pop('product', None)  # Get the product object passed as argument
-        super().__init__(*args, **kwargs)
+        super(FakeOrderForm, self).__init__(*args, **kwargs)
+        self.fields['medication'].widget.attrs.update({'class': 'form-control'})
+        self.fields['quantity'].widget.attrs.update({
+            'class': 'form-control text-center',
+            'placeholder': 'Enter quantity',
+            'aria-label': 'Example text with button addon',
+            'aria-describedby': 'button-addon1',
+            'min': '1'
+        })
 
-        self.fields['quantity'].widget.attrs.update(
-            {'class': 'form-control text-center', 'placeholder': 'Enter quantity',
-             'aria-label': 'Example text with button addon', 'aria-describedby': 'button-addon1'})
-        self.fields['quantity'].widget.input_type = 'text'
+        # Set initial max value for quantity (this will be updated dynamically)
+        self.fields['quantity'].widget.attrs['max'] = '20'
 
-        # self.fields['quantity'].validators.extend([
-        #     MinValueValidator(1),
-        #     MaxValueValidator(self.instance.product.stock_quantity)  # Set maximum value to product stock quantity
-        # ])
-
-        # Set initial values for form fields from the product object
-        if product:
-            self.initial['medication'] = product.name
-            self.initial['medication_price'] = product.price
+        # Add JavaScript class to quantity field for easier targeting
+        self.fields['quantity'].widget.attrs['class'] += ' dynamic-max'
 
     def clean_quantity(self):
-        # Ensure quantity is a positive integer
         quantity = self.cleaned_data['quantity']
-        if quantity <= 0:
-            raise forms.ValidationError("Quantity must be a positive integer.")
+        medication = self.cleaned_data.get('medication')
+        if medication and quantity > medication.stock_quantity:
+            raise ValidationError("Quantity can't be more than available stock")
         return quantity

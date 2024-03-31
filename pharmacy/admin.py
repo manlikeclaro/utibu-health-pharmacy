@@ -24,3 +24,4 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(FakeOrder)
 class FakeOrderAdmin(admin.ModelAdmin):
     list_display = ("medication", "quantity", "order_date", "total_price")
+    # readonly_fields = ("medication.price",)
