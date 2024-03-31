@@ -21,7 +21,7 @@ class FakeOrderForm(forms.ModelForm):
         })
 
         # Set initial max value for quantity (this will be updated dynamically)
-        self.fields['quantity'].widget.attrs['max'] = '20'
+        # self.fields['quantity'].widget.attrs['max'] = '20'
 
         # Add JavaScript class to quantity field for easier targeting
         self.fields['quantity'].widget.attrs['class'] += ' dynamic-max'
