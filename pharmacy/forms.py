@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
 from pharmacy.models import FakeOrder
@@ -54,3 +55,25 @@ class LoginForm(forms.Form):
         # Add labels to form fields
         self.fields['username'].label = 'Enter Username'
         self.fields['password'].label = 'Enter Password'
+
+
+class CustomUserCreationForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'username'
+        })
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'password1'
+        })
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'password2'
+        })
+
+        # Add labels to form fields
+        self.fields['username'].label = 'Enter Username'
+        self.fields['password1'].label = 'Enter Password'
+        self.fields['password2'].label = 'Confirm Password'

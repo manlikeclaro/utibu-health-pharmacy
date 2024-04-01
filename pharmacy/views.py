@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
+from django.views.generic import FormView
 
-from pharmacy.forms import FakeOrderForm, LoginForm
+from pharmacy.forms import FakeOrderForm, LoginForm, CustomUserCreationForm
 from pharmacy.models import FakeOrder, Medication
 
 
@@ -96,3 +98,37 @@ class SignIn(View):
 def sign_out(request):
     logout(request)
     return redirect('home')
+
+
+# class SignUp(FormView):
+class SignUp(View):
+    # template_name = 'pharmacy/sign-up.html'
+    # # form_class = UserCreationForm
+    # form_class = CustomUserCreationForm
+    # success_url = '/'
+    #
+    # def form_valid(self, form):
+    #     form.save()
+    #     return super().form_valid(form)
+
+    def get(self, request):
+        form = CustomUserCreationForm()
+        context = {"form": form}
+        return render(request, 'pharmacy/sign-up.html', context)
+
+    def post(self, request):
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            # Authenticate the user after saving the form
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+        else:
+            context = {"form": form}
+            return render(request, 'pharmacy/sign-up.html', context)

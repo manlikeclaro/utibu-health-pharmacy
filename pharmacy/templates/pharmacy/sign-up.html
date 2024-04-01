@@ -82,7 +82,7 @@
                         The best offer <br/>
                         <span style="color: hsl(218, 81%, 75%)">for your business</span>
                     </h1>
-                    <p class="mb-4 opacity-70 " style="color: hsl(218, 81%, 85%)">
+                    <p class="mb-3 opacity-70 " style="color: hsl(218, 81%, 85%)">
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                         Temporibus, expedita iusto veniam atque, magni tempora mollitia
                         dolorum consequatur nulla, neque debitis eos reprehenderit quasi
@@ -96,41 +96,51 @@
 
                     <div class="card bg-glass">
                         <div class="card-body px-3 pb-2 pt-4 px-md-5">
-                            <form action="{% url 'login' %}" method="post">
+                            <form action="" method="post">
                                 {% csrf_token %}
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row">
-                                    <div class="col-md-6 mb-4">
+                                    <div class="col-md-12 mb-1">
                                         <div class="form-outline">
                                             <label class="form-label"
                                                    for="username">{{ form.username.label_tag }}</label>
                                             {{ form.username }}
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-4">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-1">
                                         <div class="form-outline">
                                             <label class="form-label"
-                                                   for="password">{{ form.password.label_tag }}</label>
-                                            {{ form.password }}
+                                                   for="username">{{ form.password1.label_tag }}</label>
+                                            {{ form.password1 }}
                                         </div>
                                     </div>
-
+                                    <div class="col-md-6 mb-1">
+                                        <div class="form-outline ">
+                                            <label class="form-label"
+                                                   for="password">{{ form.password2.label_tag }}</label>
+                                            {{ form.password2 }}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- error messages -->
-                                {% if messages %}
-                                    <div class="form-outline alert alert-danger" role="alert">
-                                        {% for message in messages %}
-                                            <li>{{ message }}</li>
+                                {% if form.errors %}
+                                    <div class="alert alert-danger mt-2" role="alert">
+                                        {% for field, error_list in form.errors.items %}
+                                            {% for error in error_list %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
                                         {% endfor %}
                                     </div>
                                 {% endif %} <!-- End errors -->
 
                                 <!-- Submit button -->
-                                <button type="submit" class="btn btn-outline-dark btn-block mb-2"> Login</button>
+                                <button type="submit" class="btn btn-outline-dark btn-block mt-3 mb-4"> Register </button>
 
                             </form>
-                            <a href="{% url 'sign-up' %}"><p class="btn btn-link text-secondary">Create Account</p></a>
+                            <a href="{% url 'login' %}"><p class="btn btn-link text-secondary">Sign In</p></a>
                         </div>
                     </div>
 
