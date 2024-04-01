@@ -25,6 +25,9 @@
                         <li {% if request.path == '/pharmacy/' %} class="active" {% endif %} ><a href="{% url 'home' %}">Home</a></li>
                         <li {% if '/store' in request.path %} class="active" {% endif %} ><a href="{% url 'store' %}">Store</a></li>
                         <li {% if '/about/' in request.path %} class="active" {% endif %} ><a href="{% url 'about' %}">About</a></li>
+                        {% if user.is_superuser %}
+                            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>

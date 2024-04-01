@@ -6,7 +6,8 @@ from django.utils.text import slugify
 # Create your models here.
 class Medication(models.Model):
     name = models.CharField(max_length=100)
-    image = models.CharField(max_length=100)
+    # image = models.CharField(max_length=100)
+    medication_image = models.ImageField(upload_to='pharmacy/images', default='pharmacy/images/default_image.png')
     description = models.TextField()
     short_description = models.TextField(default="")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=None)

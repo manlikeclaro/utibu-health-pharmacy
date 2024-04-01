@@ -10,7 +10,7 @@ from pharmacy.models import FakeOrder, Medication
 # Create your views here.
 class HomeView(View):
     def get(self, request):
-        products = Medication.objects.all()[3:]
+        products = Medication.objects.all()[:3]
         context = {"products": products}
         return render(request, 'pharmacy/index.html', context)
 
