@@ -9,4 +9,6 @@ urlpatterns = [
     path('checkout', views.CheckoutView.as_view(), name='checkout'),
     path('confirmation', views.ConfirmationView.as_view(), name='confirmation'),
     path('about', views.AboutView.as_view(), name='about'),
+    path('login', views.SignIn.as_view(), name='login'),
+    path('logout', views.sign_out, name='logout'),
 ]

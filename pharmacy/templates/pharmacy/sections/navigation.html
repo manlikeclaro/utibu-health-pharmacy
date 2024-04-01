@@ -26,7 +26,7 @@
                         <li {% if '/store' in request.path %} class="active" {% endif %} ><a href="{% url 'store' %}">Store</a></li>
                         <li {% if '/about/' in request.path %} class="active" {% endif %} ><a href="{% url 'about' %}">About</a></li>
                         {% if user.is_superuser %}
-                            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                            <li><a href="{% url 'admin:index' %}">Admin Panel</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -34,7 +34,22 @@
             <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none">
                 <span class="icon-menu"></span> </a>
             <div class="icons">
-                <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+                {% if user.is_authenticated %}
+{#                    <span>Welcome, {{ user.username }}</span>#}
+                    <a class="btn btn-link" href="{% url 'logout' %}">Logout</a>
+
+{#                    <div class="dropdown">#}
+{#                        <span class="dropdown-toggle" id="dropdownMenuLink"#}
+{#                              data-toggle="dropdown" aria-expanded="false"> Welcome, {{ user.username }} </span>#}
+{#                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">#}
+{#                            <li><a class="btn btn-link dropdown-item" href="{% url 'logout' %}">Logout</a></li>#}
+{#                        </ul>#}
+{#                    </div>#}
+                {% else %}
+{#                    <span>Login to view username</span>#}
+                    <a class="btn btn-link" href="{% url 'login' %}">Login</a>
+                {% endif %}
+{#                <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>#}
             </div>
         </div>
     </div>

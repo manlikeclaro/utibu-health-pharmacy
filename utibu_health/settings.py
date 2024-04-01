@@ -123,6 +123,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 MEDIA_URL = 'media/'
 
+LOGIN_URL = 'pharmacy/login/'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

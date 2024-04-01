@@ -32,3 +32,25 @@ class FakeOrderForm(forms.ModelForm):
         if medication and quantity > medication.stock_quantity:
             raise ValidationError("Quantity can't be more than available stock")
         return quantity
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label='Username', max_length=100, required=True)
+    password = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput)
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'username'
+        })
+
+        self.fields['password'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'password'
+        })
+
+        # Add labels to form fields
+        self.fields['username'].label = 'Enter Username'
+        self.fields['password'].label = 'Enter Password'

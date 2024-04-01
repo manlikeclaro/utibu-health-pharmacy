@@ -11,8 +11,8 @@
     <div class="bg-light py-3">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 mb-0"><a href="{% url 'home' %}">Home</a> <span class="mx-2 mb-0">/</span>
-                    <a href="{% url 'store' %}">Store</a> <span class="mx-2 mb-0">/</span>
+                <div class="col-md-12 mb-0"><a class="text-black" href="{% url 'home' %}">Home</a> <span class="mx-2 mb-0">/</span>
+                    <a class="text-black" href="{% url 'store' %}">Store</a> <span class="mx-2 mb-0">/</span>
                     <strong class="text-black">{{ product.name }}</strong></div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-md-5 mr-auto">
                     <div class="text-center">
-{#                        <img src="{% static 'phamacy/images/' %}{{ product.image }}" alt="Image" class="img-fluid p-5">#}
+                        {#                        <img src="{% static 'phamacy/images/' %}{{ product.image }}" alt="Image" class="img-fluid p-5">#}
                         <img src="{{ product.medication_image.url }}" alt="Image" class="img-fluid p-5">
                     </div>
                 </div>
@@ -42,31 +42,39 @@
                         {% csrf_token %}
                         {{ form.medication.as_hidden }}
                         {{ form.medication_price.as_hidden }}
-                        <div class="mb-4">
 
-                            {% if form.errors %}
-                                <div class="alert alert-danger mt-3" role="alert">
-                                    {% for field, error_list in form.errors.items %}
-                                        {% for error in error_list %}
-                                            <p>{{ error }}</p>
+                        {% if user.is_authenticated %}
+                            <div class="mb-4">
+                                {% if form.errors %}
+                                    <div class="alert alert-danger mt-3" role="alert">
+                                        {% for field, error_list in form.errors.items %}
+                                            {% for error in error_list %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
                                         {% endfor %}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
+                                    </div>
+                                {% endif %}
 
-                            <div class="input-group mb-3" style="max-width: 220px;">
-                                <div class="mt-2">
-                                    <p class="h6">Enter Desired Quantity</p>
-                                    <!-- Quantity input field -->
-                                    {{ form.quantity }}
+                                <div class="input-group mb-3" style="max-width: 220px;">
+                                    <div class="mt-2">
+                                        <p class="h6">Enter Desired Quantity</p>
+                                        <!-- Quantity input field -->
+                                        {{ form.quantity }}
+                                    </div>
                                 </div>
+
                             </div>
-                        </div>
 
-                        <!-- Submit button -->
-                        <button type="submit" class="buy-now btn btn-sm height-auto px-4 py-3 btn-outline-success">
-                            Place Order
-                        </button>
+                            <!-- Submit button -->
+                            <button type="submit" class="buy-now btn btn-sm height-auto px-4 py-3 btn-outline-dark">
+                                Place Order
+                            </button>
+                        {% else %}
+                            <div class="mt-2">
+                                <p class="h6">Login to place order</p>
+                            </div>
+                        {% endif %}
+
                     </form>
                 </div>
             </div>

@@ -1,9 +1,11 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 
-from pharmacy.forms import FakeOrderForm
+from pharmacy.forms import FakeOrderForm, LoginForm
 from pharmacy.models import FakeOrder, Medication
 
 
@@ -65,3 +67,32 @@ class ConfirmationView(View):
 
 class AboutView(View):
     pass
+
+
+class SignIn(View):
+    def get(self, request):
+        form = LoginForm
+        context = {"form": form}
+        return render(request, 'pharmacy/login.html', context)
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Invalid Username or Password.')
+        else:
+            messages.error(request, 'Form submission failed. Please correct the errors below.')
+
+        context = {"form": form}
+        return render(request, 'pharmacy/login.html', context)
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('home')
