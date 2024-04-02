@@ -47,9 +47,10 @@ class StoreItemView(View):
             product = get_object_or_404(Medication, slug=slug)
             fake_order = form.save(commit=False)
             fake_order.medication = product
+            fake_order.customer = request.user.customer  # Assign the current user's customer object
             fake_order.save()
             # medication.stock_quantity -= fake_order.quantity
-            product.save()
+            # product.save()
             return redirect(reverse('confirmation'))  # Redirect to success page or any other page
         else:
             product = get_object_or_404(Medication, slug=slug)
@@ -63,7 +64,9 @@ class CheckoutView(View):
 
 class ConfirmationView(View):
     def get(self, request):
-        orders = FakeOrder.objects.all()
+        # orders = FakeOrder.objects.all()
+        user = request.user.customer
+        orders = FakeOrder.objects.filter(customer=user)
         return render(request, 'pharmacy/confirmation.html', {"orders": orders})
 
 

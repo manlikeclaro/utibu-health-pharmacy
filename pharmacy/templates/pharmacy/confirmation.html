@@ -1,5 +1,6 @@
 {% extends 'pharmacy/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}
     Confirmation
@@ -21,42 +22,69 @@
     <div class="site-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center mb-4">
                     <span class="icon-check_circle display-3 text-success"></span>
-                    <h2 class="display-3 text-black">Thank you!</h2>
+                    <h2 class=" text-black">Thank you!</h2>
                     <p class="lead mb-5">You order was successfuly completed.</p>
                     <p><a href="{% url 'store' %}" class="btn btn-md height-auto px-4 py-3 btn-primary">
-                        Back to store</a></p>
+                        Continue Shopping</a></p>
                 </div>
-                <div>
-                    <h2 class="h3 mb-3 text-black">Orders List</h2>
-                    <div class="p-3 p-lg-5 ">
-                        <table class="table site-block-order-table mb-5">
-                            <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Medication</th>
-                                <th>Quantity</th>
-                                <th>Order Date</th>
-                                <th>Price</th>
-                                <th>Total Price</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for order in orders %}
-                                <tr>
-                                    <td>{{ order.id }}</td>
-                                    <td>{{ order.medication }}</td>
-                                    <td>{{ order.quantity }}</td>
-                                    <td>{{ order.order_date }}</td>
-                                    <td>£{{ order.medication_price }}</td>
-                                    <td>£{{ order.total_price }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
 
+                <div class="col-md-12">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h2 class="h3 mb-3 text-black">Order Summary</h2>
+                            <div class="px-3 py-2 p-lg-5">
+                                <table class="table site-block-order-table mb-5 te">
+                                    <thead>
+                                    <!-- Table headers -->
+                                    <th>Transaction ID</th>
+                                    <th>Date</th>
+                                    <th>Amount Due</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for order in orders %}
+                                        <tr>
+                                            <td>
+                                                <!-- Display product information -->
+                                                <span class="text-info">{{ order.transaction_id }}</span>
+{#                                                <p>{{ order.medication }} <strong>x</strong> {{ order.quantity }}</p>#}
+                                                <p>{{ order.medication }}</p>
+                                            </td>
+                                            <td>
+                                                <!-- Display order date using naturaltime filter -->
+                                                <span class="text-info">{{ order.order_date }}</span>
+                                                <p class="text-secondary">
+                                                    Ordered, {{ order.order_date|naturaltime }}</p>
+                                            </td>
+                                            <td>
+                                                <!-- Display total price for the order -->
+                                                <span class="text-info">£{{ order.medication.price }} <strong>x</strong> {{ order.quantity }}</span>
+                                                <p>£{{ order.total_price }}</p>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+{#                                    <tr>#}
+{#                                        <td class="text-black font-weight-bold"><strong>Total Due</strong></td>#}
+{#                                        <td></td>#}
+{#                                        <td class="text-black font-weight-bold">#}
+{#                                            {% with total_sum=0 %}#}
+{#                                                {% for order in orders %}#}
+{#                                                    {% if order.total_price %}#}
+{#                                                        {% with total_sum=total_sum|add:order.total_price %}#}
+{#                                                        {% endwith %}#}
+{#                                                    {% endif %}#}
+{#                                                {% endfor %}#}
+{#                                                <strong>{{ total_sum }}</strong>#}
+{#                                            {% endwith %}#}
+{#                                        </td>#}
+{#                                    </tr>#}
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
