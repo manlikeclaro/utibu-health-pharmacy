@@ -7,8 +7,8 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import FormView
 
-from pharmacy.forms import FakeOrderForm, LoginForm, CustomUserCreationForm
-from pharmacy.models import FakeOrder, Medication
+from pharmacy.forms import LoginForm, CustomUserCreationForm, OrderForm
+from pharmacy.models import Medication, Order
 
 
 # Create your views here.
@@ -37,18 +37,18 @@ class StoreView(View):
 class StoreItemView(View):
     def get(self, request, slug, *args, **kwargs):
         product = Medication.objects.get(slug=slug)
-        form = FakeOrderForm(initial={'medication': product})
+        form = OrderForm(initial={'medication': product})
         context = {'product': product, 'form': form}
         return render(request, 'pharmacy/store-item.html', context)
 
     def post(self, request, slug, *args, **kwargs):
-        form = FakeOrderForm(request.POST)
+        form = OrderForm(request.POST)
         if form.is_valid():
             product = get_object_or_404(Medication, slug=slug)
-            fake_order = form.save(commit=False)
-            fake_order.medication = product
-            fake_order.customer = request.user.customer  # Assign the current user's customer object
-            fake_order.save()
+            order = form.save(commit=False)
+            order.medication = product
+            order.customer = request.user.customer  # Assign the current user's customer object
+            order.save()
             # medication.stock_quantity -= fake_order.quantity
             # product.save()
             return redirect(reverse('confirmation'))  # Redirect to success page or any other page
@@ -66,7 +66,7 @@ class ConfirmationView(View):
     def get(self, request):
         # orders = FakeOrder.objects.all()
         user = request.user.customer
-        orders = FakeOrder.objects.filter(customer=user)
+        orders = Order.objects.filter(customer=user)
         return render(request, 'pharmacy/confirmation.html', {"orders": orders})
 
 

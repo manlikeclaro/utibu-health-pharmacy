@@ -2,16 +2,16 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from pharmacy.models import FakeOrder
+from pharmacy.models import Order
 
 
-class FakeOrderForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
     class Meta:
-        model = FakeOrder
+        model = Order
         fields = ['medication', 'quantity']
 
     def __init__(self, *args, **kwargs):
-        super(FakeOrderForm, self).__init__(*args, **kwargs)
+        super(OrderForm, self).__init__(*args, **kwargs)
         self.fields['medication'].widget.attrs.update({'class': 'form-control'})
         self.fields['quantity'].widget.attrs.update({
             'class': 'form-control text-center',

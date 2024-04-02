@@ -44,26 +44,9 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    medication = models.ForeignKey(Medication, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    order_date = models.DateTimeField(auto_now_add=True)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=None)
-
-    def save(self, *args, **kwargs):
-        self.price = self.medication.price * self.quantity
-        if self.medication.stock_quantity >= self.quantity:
-            self.medication.stock_quantity -= self.quantity
-        super().save()
-
-    def __str__(self):
-        return f"{self.customer.user.username} - {self.medication.name}"
-
-
-class FakeOrder(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, default=None)
     medication = models.ForeignKey(Medication, on_delete=models.SET_NULL, null=True)
-    medication_price = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+    medication_price = models.DecimalField(max_digits=10, decimal_places=2, editable=False, default=0)
     quantity = models.IntegerField(default=1)
     order_date = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=None, editable=False)
@@ -86,11 +69,43 @@ class FakeOrder(models.Model):
             # log a message, or handle the situation as per your application's requirements.
             raise ValueError("Not enough quantity in stock to fulfill the order")
 
-    # def __str__(self):
-    #     return f"{self.medication} - {self.customer.user.first_name}"
-
     def __str__(self):
         if self.customer and self.customer.user.first_name:  # Check if customer and user exist
             return f"{self.medication} - {self.customer.user.first_name}"
         else:
             return f"{self.medication} - Unknown Customer"  # Provide fallback if customer or user doesn't exist
+
+# class FakeOrder(models.Model):
+#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, default=None)
+#     medication = models.ForeignKey(Medication, on_delete=models.SET_NULL, null=True)
+#     medication_price = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+#     quantity = models.IntegerField(default=1)
+#     order_date = models.DateTimeField(auto_now_add=True)
+#     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=None, editable=False)
+#     transaction_id = models.CharField(max_length=20, unique=True, editable=False, default='')
+#
+#     def save(self, *args, **kwargs):
+#         if not self.transaction_id:
+#             self.transaction_id = generate_transaction_id(self.customer.id)
+#
+#         self.medication_price = self.medication.price
+#         self.total_price = self.medication_price * self.quantity
+#
+#         # Check if there's enough quantity in stock to fulfill the order
+#         if self.medication.stock_quantity >= self.quantity:
+#             self.medication.stock_quantity -= self.quantity
+#             self.medication.save()  # Update medication stock quantity
+#             super().save()  # Save only if there's enough quantity in stock
+#         else:
+#             # If there's not enough quantity in stock, you may raise an exception,
+#             # log a message, or handle the situation as per your application's requirements.
+#             raise ValueError("Not enough quantity in stock to fulfill the order")
+#
+#     # def __str__(self):
+#     #     return f"{self.medication} - {self.customer.user.first_name}"
+#
+#     def __str__(self):
+#         if self.customer and self.customer.user.first_name:  # Check if customer and user exist
+#             return f"{self.medication} - {self.customer.user.first_name}"
+#         else:
+#             return f"{self.medication} - Unknown Customer"  # Provide fallback if customer or user doesn't exist

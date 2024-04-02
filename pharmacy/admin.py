@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from pharmacy.models import Medication, Customer, Order, FakeOrder
+from pharmacy.models import Medication, Customer, Order
 
 
 # Register your models here.
@@ -21,7 +21,7 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ("total_price",)
 
 
-@admin.register(FakeOrder)
-class FakeOrderAdmin(admin.ModelAdmin):
-    list_display = ("medication", "quantity", "order_date", "total_price")
-    # readonly_fields = ("medication.price",)
+# @admin.register(FakeOrder)
+# class FakeOrderAdmin(admin.ModelAdmin):
+#     list_display = ("medication", "quantity", "order_date", "total_price")
+#     # readonly_fields = ("medication.price",)
