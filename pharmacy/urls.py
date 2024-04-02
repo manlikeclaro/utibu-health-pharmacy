@@ -12,4 +12,7 @@ urlpatterns = [
     path('login', views.SignIn.as_view(), name='login'),
     path('logout', views.sign_out, name='logout'),
     path('sign-up', views.SignUp.as_view(), name='sign-up'),
+
+    # Include API URLs
+    path('api/', include('pharmacy.api.urls')),
 ]

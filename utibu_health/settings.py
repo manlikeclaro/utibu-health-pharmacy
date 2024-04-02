@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'pharmacy.apps.PharmacyConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
