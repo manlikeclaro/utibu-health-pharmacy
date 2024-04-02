@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -10,6 +11,7 @@ from pharmacy.serializers import MedicationSerializer, CustomerSerializer, Order
 
 # Class-based views for listing and creating Medication instances
 class APIRootView(APIView):
+    @extend_schema(responses={200: dict})
     def get(self, request, format=None):
         # Generate a dictionary containing the available paths and their corresponding URLs
         paths = {
@@ -45,6 +47,7 @@ class MedicationListCreateAPIView(generics.ListCreateAPIView):
             return MedicationPOSTSerializer
         return MedicationGETSerializer
 
+    @extend_schema(request=MedicationPOSTSerializer, responses=MedicationSerializer)
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -62,6 +65,10 @@ class MedicationRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIVi
             return MedicationPOSTSerializer
         return MedicationGETSerializer
 
+    @extend_schema(request=MedicationPOSTSerializer, responses=MedicationSerializer)
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
 
 # Customization End
 
@@ -71,11 +78,19 @@ class CustomerListCreateAPIView(generics.ListCreateAPIView):
     queryset = Customer.objects.all()  # Retrieve all Customer instances
     serializer_class = CustomerSerializer  # Serializer class to convert queryset to JSON and vice versa
 
+    @extend_schema(request=CustomerSerializer, responses=CustomerSerializer)
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
 
 # Class-based views for retrieving, updating, and deleting Customer instances
 class CustomerRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Customer.objects.all()  # Retrieve all Customer instances
     serializer_class = CustomerSerializer  # Serializer class to convert queryset to JSON and vice versa
+
+    @extend_schema(request=CustomerSerializer, responses=CustomerSerializer)
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
 
 
 # Class-based views for listing and creating Order instances
@@ -83,8 +98,16 @@ class OrderListCreateAPIView(generics.ListCreateAPIView):
     queryset = Order.objects.all()  # Retrieve all Order instances
     serializer_class = OrderSerializer  # Serializer class to convert queryset to JSON and vice versa
 
+    @extend_schema(request=OrderSerializer, responses=OrderSerializer)
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
 
 # Class-based views for retrieving, updating, and deleting Order instances
 class OrderRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()  # Retrieve all Order instances
     serializer_class = OrderSerializer  # Serializer class to convert queryset to JSON and vice versa
+
+    @extend_schema(request=OrderSerializer, responses=OrderSerializer)
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)

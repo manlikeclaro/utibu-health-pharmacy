@@ -1,4 +1,6 @@
 from django.urls import path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+
 from .views import (
     APIRootView,
     MedicationListCreateAPIView,
@@ -17,4 +19,9 @@ urlpatterns = [
     path('customers/<int:pk>/', CustomerRetrieveUpdateDestroyAPIView.as_view(), name='customer-detail'),
     path('orders/', OrderListCreateAPIView.as_view(), name='order-list-create'),
     path('orders/<int:pk>/', OrderRetrieveUpdateDestroyAPIView.as_view(), name='order-detail'),
+
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    # path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]

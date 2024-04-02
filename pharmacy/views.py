@@ -71,7 +71,8 @@ class ConfirmationView(View):
 
 
 class AboutView(View):
-    pass
+    def get(self, request):
+        return render(request, 'pharmacy/about.html')
 
 
 class SignIn(View):

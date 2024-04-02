@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="site-footer">
+<footer class="site-footer site-section bg-light custom-border-bottom">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -15,6 +15,8 @@
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'store' %}">Store</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'admin:index' %}">Admin Panel</a></li>
+                    <li><a href="{% url 'api-root' %}">Pharmacy Api</a></li>
                 </ul>
             </div>
             <div class="col-md-6 col-lg-3">
@@ -22,7 +24,7 @@
                     <h3 class="footer-heading mb-4">Contact Info</h3>
                     <ol class="list-unstyled">
                         <li>Kenyatta Hospital, Nairobi, KE</li>
-                        <li><a href="#">+254 722 143 474</a></li>
+                        <li><a href="#"><span class="text-info">+254 722 143 474</span></a></li>
                         <li>emailaddress@domain.com</li>
                     </ol>
                 </div>
@@ -37,7 +39,6 @@
                     All rights reserved
                 </p>
             </div>
-
         </div>
     </div>
 </footer> <!-- End Footer -->

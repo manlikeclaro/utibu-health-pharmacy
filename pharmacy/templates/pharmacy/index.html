@@ -2,15 +2,10 @@
 {% load static %}
 
 {% block title %}
-
+    Utibu Health
 {% endblock %}
 
 {% block content %}
-    {#    <form action="" method="post">#}
-    {#        {% csrf_token %}#}
-    {#        {{ form }}#}
-    {#        <button type="submit">Place Order</button>#}
-    {#    </form>#}
 
     <div class="site-blocks-cover" style="background-image: url('{% static 'phamacy/' %}images/hero_2.jpg');">
         <div class="container">
@@ -40,7 +35,7 @@
                     <div class="col-sm-6 col-lg-4 text-center item mb-4">
                         <span class="tag">Sale</span>
                         <a href="{% url 'store-item' product.slug %}">
-{#                            <img src="{% static 'phamacy/images/' %}product_01.png" alt="{{ product.name }}"></a>#}
+                            {#                            <img src="{% static 'phamacy/images/' %}product_01.png" alt="{{ product.name }}"></a>#}
                             <img src="{{ product.medication_image.url }}" alt="{{ product.name }}"></a>
                         <h3 class="text-dark"><a href="{% url 'store-item' product.slug %}">{{ product.name }}</a></h3>
                         <p class="price">
@@ -59,5 +54,77 @@
             </div>
         </div>
     </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row">
+                <div class="title-section text-center col-12">
+                    <h2 class="text-uppercase">Testimonials</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 block-3 products-wrap">
+                    <div class="nonloop-block-3 no-direction owl-carousel">
+
+                        <div class="testimony">
+                            <blockquote>
+                                <img src="{% static 'phamacy/' %}images/person_1.jpg" alt="Image"
+                                     class="img-fluid w-25 mb-4 rounded-circle">
+                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis
+                                    voluptatem consectetur quam tempore obcaecati maiores voluptate aspernatur iusto
+                                    eveniet, placeat ab quod tenetur ducimus. Minus ratione sit quaerat unde.&rdquo;</p>
+                            </blockquote>
+
+                            <p>&mdash; Kelly Holmes</p>
+                        </div>
+
+                        <div class="testimony">
+                            <blockquote>
+                                <img src="{% static 'phamacy/' %}images/person_2.jpg" alt="Image"
+                                     class="img-fluid w-25 mb-4 rounded-circle">
+                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis
+                                    voluptatem consectetur quam tempore
+                                    obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur
+                                    ducimus. Minus ratione sit quaerat
+                                    unde.&rdquo;</p>
+                            </blockquote>
+
+                            <p>&mdash; Rebecca Morando</p>
+                        </div>
+
+                        <div class="testimony">
+                            <blockquote>
+                                <img src="{% static 'phamacy/' %}images/person_3.jpg" alt="Image"
+                                     class="img-fluid w-25 mb-4 rounded-circle">
+                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis
+                                    voluptatem consectetur quam tempore
+                                    obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur
+                                    ducimus. Minus ratione sit quaerat
+                                    unde.&rdquo;</p>
+                            </blockquote>
+
+                            <p>&mdash; Lucas Gallone</p>
+                        </div>
+
+                        <div class="testimony">
+                            <blockquote>
+                                <img src="{% static 'phamacy/' %}images/person_4.jpg" alt="Image"
+                                     class="img-fluid w-25 mb-4 rounded-circle">
+                                <p>&ldquo;Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis
+                                    voluptatem consectetur quam tempore
+                                    obcaecati maiores voluptate aspernatur iusto eveniet, placeat ab quod tenetur
+                                    ducimus. Minus ratione sit quaerat
+                                    unde.&rdquo;</p>
+                            </blockquote>
+
+                            <p>&mdash; Andrew Neel</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
