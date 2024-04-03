@@ -33,7 +33,9 @@
             <div class="row">
                 {% for product in products %}
                     <div class="col-sm-6 col-lg-4 text-center item mb-4">
-                        <span class="tag">Sale</span>
+                        {% if product.sale %}
+                        	<span class="tag">Sale</span>
+                        {% endif %}
                         <a href="{% url 'store-item' product.slug %}">
                             {#                            <img src="{% static 'phamacy/images/' %}product_01.png" alt="{{ product.name }}"></a>#}
                             <img src="{{ product.medication_image.url }}" alt="{{ product.name }}"></a>

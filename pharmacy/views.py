@@ -26,11 +26,7 @@ class StoreView(View):
 
         page_number = request.GET.get('page')
         page_object = paginator.get_page(page_number)
-
-        context = {
-            "products": products,
-            "page_object": page_object
-        }
+        context = {"products": products, "page_object": page_object}
         return render(request, 'pharmacy/store.html', context)
 
 

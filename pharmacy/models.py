@@ -21,6 +21,7 @@ class Medication(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     stock_quantity = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
+    sale = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

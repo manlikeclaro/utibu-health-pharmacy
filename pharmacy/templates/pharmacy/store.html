@@ -30,14 +30,20 @@
             <div class="row">
                 {% for product in page_object %}
                     <div class="col-sm-6 col-lg-4 text-center item mb-4">
-                        {#                        <span class="tag">Sale</span>#}
+                        {% if product.sale %}
+                        	<span class="tag">Sale</span>
+                        {% endif %}
                         <a href="{% url 'store-item' product.slug %}">
 {#                            <img src="{% static 'phamacy/images/' %}{{ product.image }}" alt="Image"></a>#}
                             <img src="{{ product.medication_image.url }}" alt="Image"></a>
                         <h3 class="text-dark"><a href="{% url 'store-item' product.slug %}">{{ product.name }}</a></h3>
                         <p class="price">
-                            {#                            <del>95.00</del> &mdash; $55.00#}
-                            £{{ product.price }}
+                            {% if product.sale %}
+                                <del>£{{ product.price }}</del> &mdash; £{{ product.price }}
+                            {% else %}
+                                £{{ product.price }}
+                            {% endif %}
+{#                            £{{ product.price }}#}
                         </p>
                     </div>
                 {% endfor %}

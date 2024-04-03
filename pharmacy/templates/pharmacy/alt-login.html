@@ -52,6 +52,14 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        .my-text {
+            font-family: Rubik, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: 22px;
+            font-weight: 900;
+            line-height: 37.4px;
+            color: rgb(0, 0, 0);
+        }
     </style>
 </head>
 
@@ -62,17 +70,20 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="form-container">
-                    <h2 class="form-title">Login Form</h2>
+                    <h1 class="form-title my-text">UTIBU HEALTH</h1>
+                    <p class="form-title">login form</p>
                     <form action="{% url 'login' %}" method="post">
                         {% csrf_token %}
 
-                        <div class="mb-2">
-                            <label class="form-label" for="username">{{ form.username.label_tag }}</label>
-                            {{ form.username }}
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label" for="password">{{ form.password.label_tag }}</label>
-                            {{ form.password }}
+                        <div class="row ">
+                            <div class="mb-2">
+                                <label class="form-label" for="username">{{ form.username.label_tag }}</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="password">{{ form.password.label_tag }}</label>
+                                {{ form.password }}
+                            </div>
                         </div>
 
                         <!-- error messages -->
