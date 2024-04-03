@@ -2,14 +2,14 @@ openapi: 3.0.3
 info:
   title: Utibu Health Pharmacy API
   version: 1.0.0
-  description: API for interacting with Utibu Health Pharmacy database to serve customers
-    through a mobile application.
+  description: API for interacting with Utibu Health Pharmacy database to serve customers through a mobile application.
 paths:
   /pharmacy/api/:
     get:
+      summary: Retrieve pharmacy API information
       operationId: pharmacy_api_retrieve
       tags:
-      - pharmacy
+      - Pharmacy
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -24,9 +24,10 @@ paths:
           description: ''
   /pharmacy/api/customers/:
     get:
+      summary: List all customers
       operationId: pharmacy_api_customers_list
       tags:
-      - pharmacy
+      - Customers
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -41,9 +42,10 @@ paths:
                   $ref: '#/components/schemas/Customer'
           description: ''
     post:
+      summary: Create new customer
       operationId: pharmacy_api_customers_create
       tags:
-      - pharmacy
+      - Customers
       requestBody:
         content:
           application/json:
@@ -69,6 +71,7 @@ paths:
           description: ''
   /pharmacy/api/customers/{id}/:
     get:
+      summary: Retrieve customer details
       operationId: pharmacy_api_customers_retrieve
       parameters:
       - in: path
@@ -77,7 +80,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Customers
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -90,6 +93,7 @@ paths:
                 $ref: '#/components/schemas/Customer'
           description: ''
     put:
+      summary: Update customer details
       operationId: pharmacy_api_customers_update
       parameters:
       - in: path
@@ -98,7 +102,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Customers
       requestBody:
         content:
           application/json:
@@ -123,6 +127,7 @@ paths:
                 $ref: '#/components/schemas/Customer'
           description: ''
     patch:
+      summary: Partially update customer details
       operationId: pharmacy_api_customers_partial_update
       parameters:
       - in: path
@@ -131,7 +136,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Customers
       requestBody:
         content:
           application/json:
@@ -155,6 +160,7 @@ paths:
                 $ref: '#/components/schemas/Customer'
           description: ''
     delete:
+      summary: Delete customer
       operationId: pharmacy_api_customers_destroy
       parameters:
       - in: path
@@ -163,7 +169,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Customers
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -173,9 +179,10 @@ paths:
           description: No response body
   /pharmacy/api/medications/:
     get:
+      summary: List all medications
       operationId: pharmacy_api_medications_list
       tags:
-      - pharmacy
+      - Medications
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -190,9 +197,10 @@ paths:
                   $ref: '#/components/schemas/MedicationGET'
           description: ''
     post:
+      summary: Create new medication
       operationId: pharmacy_api_medications_create
       tags:
-      - pharmacy
+      - Medications
       requestBody:
         content:
           application/json:
@@ -218,6 +226,7 @@ paths:
           description: ''
   /pharmacy/api/medications/{id}/:
     get:
+      summary: Retrieve medication details
       operationId: pharmacy_api_medications_retrieve
       parameters:
       - in: path
@@ -226,7 +235,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Medications
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -239,6 +248,7 @@ paths:
                 $ref: '#/components/schemas/MedicationGET'
           description: ''
     put:
+      summary: Update medication details
       operationId: pharmacy_api_medications_update
       parameters:
       - in: path
@@ -247,7 +257,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Medications
       requestBody:
         content:
           application/json:
@@ -272,6 +282,7 @@ paths:
                 $ref: '#/components/schemas/MedicationPOST'
           description: ''
     patch:
+      summary: Partially update medication details
       operationId: pharmacy_api_medications_partial_update
       parameters:
       - in: path
@@ -280,7 +291,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Medications
       requestBody:
         content:
           application/json:
@@ -304,6 +315,7 @@ paths:
                 $ref: '#/components/schemas/MedicationPOST'
           description: ''
     delete:
+      summary: Delete medication
       operationId: pharmacy_api_medications_destroy
       parameters:
       - in: path
@@ -312,7 +324,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Medications
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -322,9 +334,10 @@ paths:
           description: No response body
   /pharmacy/api/orders/:
     get:
+      summary: List all orders
       operationId: pharmacy_api_orders_list
       tags:
-      - pharmacy
+      - Orders
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -339,9 +352,10 @@ paths:
                   $ref: '#/components/schemas/Order'
           description: ''
     post:
+      summary: Create new order
       operationId: pharmacy_api_orders_create
       tags:
-      - pharmacy
+      - Orders
       requestBody:
         content:
           application/json:
@@ -366,6 +380,7 @@ paths:
           description: ''
   /pharmacy/api/orders/{id}/:
     get:
+      summary: Retrieve order details
       operationId: pharmacy_api_orders_retrieve
       parameters:
       - in: path
@@ -374,7 +389,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Orders
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -387,6 +402,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
     put:
+      summary: Update order details
       operationId: pharmacy_api_orders_update
       parameters:
       - in: path
@@ -395,7 +411,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Orders
       requestBody:
         content:
           application/json:
@@ -419,6 +435,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
     patch:
+      summary: Partially update order details
       operationId: pharmacy_api_orders_partial_update
       parameters:
       - in: path
@@ -427,7 +444,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Orders
       requestBody:
         content:
           application/json:
@@ -451,6 +468,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
     delete:
+      summary: Delete order
       operationId: pharmacy_api_orders_destroy
       parameters:
       - in: path
@@ -459,7 +477,7 @@ paths:
           type: integer
         required: true
       tags:
-      - pharmacy
+      - Orders
       security:
       - cookieAuth: []
       - basicAuth: []

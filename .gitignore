@@ -3,12 +3,6 @@
 .env
 *.env
 
-# Database files
-db.sqlite3
-
-# Ignore Django migration files
-**/migrations/
-
 # Compiled Python files
 *.pyc
 __pycache__/
