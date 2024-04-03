@@ -16,5 +16,5 @@ In addition to the RESTful API, this project includes a web application with tem
 
 
 ## Usage
-1. API Endpoints: [API Documentation](./documentation/API_Documentation.md)
+1. API Endpoints: [API Documentation](./pharmacy/api/README.md)
 
