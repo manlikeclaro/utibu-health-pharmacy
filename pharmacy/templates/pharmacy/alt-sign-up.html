@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'phamacy/images/' %}favicon.png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .background-radial-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: hsl(218, 41%, 15%);
+            background-image: radial-gradient(450px circle at 0% 0%, hsl(218, 41%, 35%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%), radial-gradient(850px circle at 100% 100%, hsl(218, 41%, 45%) 15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%, transparent 100%);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="background-radial-gradient">
+    <div class="container">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="form-container">
+                    <h2 class="form-title">Register</h2>
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-2">
+                            <label class="form-label"
+                                   for="username">{{ form.username.label_tag }}</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label"
+                                   for="username">{{ form.password1.label_tag }}</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label"
+                                   for="password">{{ form.password2.label_tag }}</label>
+                            {{ form.password2 }}
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label"
+                                   for="password">{{ form.phone_number.label_tag }}</label>
+                            {{ form.phone_number }}
+                        </div>
+
+                        <!-- error messages -->
+                        {% if form.errors %}
+                            <div class="alert alert-danger mt-2" role="alert">
+                                {% for field, error_list in form.errors.items %}
+                                    {% for error in error_list %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        {% endif %} <!-- End errors -->
+
+                        <div class="mb-2 text-center">
+                            <button type="submit" class="btn btn-link">Register</button>
+                        </div>
+
+                        <div class="footer-links">
+                            <a href="{% url 'login' %}">Login</a> | <a href="{% url 'home' %}">Home</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

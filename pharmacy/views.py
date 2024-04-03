@@ -8,7 +8,7 @@ from django.views import View
 from django.views.generic import FormView
 
 from pharmacy.forms import LoginForm, CustomUserCreationForm, OrderForm
-from pharmacy.models import Medication, Order
+from pharmacy.models import Medication, Order, Customer
 
 
 # Create your views here.
@@ -21,7 +21,7 @@ class HomeView(View):
 
 class StoreView(View):
     def get(self, request):
-        products = Medication.objects.all()
+        products = Medication.objects.all().order_by('-id')
         paginator = Paginator(products, 9)
 
         page_number = request.GET.get('page')
@@ -67,7 +67,9 @@ class ConfirmationView(View):
         # orders = FakeOrder.objects.all()
         user = request.user.customer
         orders = Order.objects.filter(customer=user)
-        return render(request, 'pharmacy/confirmation.html', {"orders": orders})
+        order_total = sum(order.total_price for order in orders)
+        context = {"orders": orders, "grand_total": order_total}
+        return render(request, 'pharmacy/confirmation.html', context)
 
 
 class AboutView(View):
@@ -79,7 +81,8 @@ class SignIn(View):
     def get(self, request):
         form = LoginForm
         context = {"form": form}
-        return render(request, 'pharmacy/login.html', context)
+        # return render(request, 'pharmacy/login.html', context)
+        return render(request, 'pharmacy/alt-login.html', context)
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -96,7 +99,8 @@ class SignIn(View):
             messages.error(request, 'Form submission failed. Please correct the errors below.')
 
         context = {"form": form}
-        return render(request, 'pharmacy/login.html', context)
+        # return render(request, 'pharmacy/login.html', context)
+        return render(request, 'pharmacy/alt-login.html', context)
 
 
 def sign_out(request):
@@ -118,12 +122,19 @@ class SignUp(View):
     def get(self, request):
         form = CustomUserCreationForm()
         context = {"form": form}
-        return render(request, 'pharmacy/sign-up.html', context)
+        # return render(request, 'pharmacy/sign-up.html', context)
+        return render(request, 'pharmacy/alt-sign-up.html', context)
 
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            # form.save()
+            user = form.save(commit=False)
+            user.save()
+
+            # Create Customer instance associated with the user
+            phone_number = form.cleaned_data['phone_number']
+            customer = Customer.objects.create(user=user, phone_number=phone_number)
 
             # Authenticate the user after saving the form
             username = form.cleaned_data['username']
@@ -135,4 +146,5 @@ class SignUp(View):
                 return redirect('home')
         else:
             context = {"form": form}
-            return render(request, 'pharmacy/sign-up.html', context)
+            # return render(request, 'pharmacy/sign-up.html', context)
+            return render(request, 'pharmacy/alt-sign-up.html', context)

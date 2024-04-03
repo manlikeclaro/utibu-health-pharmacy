@@ -23,7 +23,7 @@
                 <nav class="site-navigation text-right text-md-center" role="navigation">
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
                         <li {% if request.path == '/pharmacy/' %} class="active" {% endif %} ><a href="{% url 'home' %}">Home</a></li>
-                        <li {% if '/store' in request.path %} class="active" {% endif %} ><a href="{% url 'store' %}">Store</a></li>
+                        <li {% if '/store' in request.path or '/confirmation' in request.path %} class="active" {% endif %} ><a href="{% url 'store' %}">Store</a></li>
                         <li {% if '/about' in request.path %} class="active" {% endif %} ><a href="{% url 'about' %}">About</a></li>
                         {% if user.is_superuser %}
                             <li class="has-children">
@@ -31,6 +31,7 @@
                                 <ul class="dropdown">
                                     <li><a href="{% url 'admin:index' %}">Admin Panel</a></li>
                                     <li><a href="{% url 'api-root' %}">Pharmacy Api</a></li>
+                                    <li><a href="{% url 'docs' %}">Api Documentation</a></li>
                                 </ul>
                             </li>
 

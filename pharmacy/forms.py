@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-from pharmacy.models import Order
+from pharmacy.models import Order, Customer
 
 
 class OrderForm(forms.ModelForm):
@@ -58,6 +59,13 @@ class LoginForm(forms.Form):
 
 
 class CustomUserCreationForm(UserCreationForm):
+    # address = forms.CharField(max_length=100, required=True)
+    phone_number = forms.CharField(max_length=15, required=True)
+
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2', 'phone_number')
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
@@ -72,8 +80,13 @@ class CustomUserCreationForm(UserCreationForm):
             'class': 'form-control',
             'id': 'password2'
         })
+        self.fields['phone_number'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'phone_number'
+        })
 
         # Add labels to form fields
         self.fields['username'].label = 'Enter Username'
         self.fields['password1'].label = 'Enter Password'
         self.fields['password2'].label = 'Confirm Password'
+        self.fields['phone_number'].label = 'Enter Phone Number'
