@@ -39,11 +39,11 @@
                         <h3 class="text-dark"><a href="{% url 'store-item' product.slug %}">{{ product.name }}</a></h3>
                         <p class="price">
                             {% if product.sale %}
-                                <del>£{{ product.price }}</del> &mdash; £{{ product.price }}
+                                <del>KSH {{ product.price }}</del> &mdash; KSH {{ product.price }}
                             {% else %}
-                                £{{ product.price }}
+                                KSH {{ product.price }}
                             {% endif %}
-{#                            £{{ product.price }}#}
+{#                            KSH {{ product.price }}#}
                         </p>
                     </div>
                 {% endfor %}

@@ -60,8 +60,8 @@
                                             </td>
                                             <td>
                                                 <!-- Display total price for the order -->
-                                                <span class="text-info">£{{ order.medication.price }} <strong>x</strong> {{ order.quantity }}</span>
-                                                <p>£{{ order.total_price }}</p>
+                                                <span class="text-info">KSH {{ order.medication.price }} <strong>x</strong> {{ order.quantity }}</span>
+                                                <p>KSH {{ order.total_price }}</p>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -69,7 +69,7 @@
                                         <td class="text-black font-weight-bold"><strong>Total Due</strong></td>
                                         <td></td>
                                         <td class="text-black font-weight-bold">
-                                            <strong>{{ grand_total }}</strong>
+                                            <strong>KSH {{ grand_total }}</strong>
                                         </td>
                                     </tr>
                                     </tbody>
