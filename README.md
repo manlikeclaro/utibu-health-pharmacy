@@ -10,9 +10,10 @@ In addition to the RESTful API, this project includes a web application with tem
 2. Create a virtual env `python3 -m venv venv`
 3. Activate the venv `venv\Scripts\activate`
 4. Install dependencies: `pip install -r requirements.txt`.
-5. Set up the database: `python manage.py migrate`.
-6. Create superuser: `python manage.py createsuperuser`.
-7. Run the development server: `python manage.py runserver`
+5. Make database migrations: `python manage.py makemigrations`.
+6. Set up the database: `python manage.py migrate`.
+7. Create superuser: `python manage.py createsuperuser`.
+8. Run the development server: `python manage.py runserver`
 
 
 ## Usage
