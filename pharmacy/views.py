@@ -43,11 +43,18 @@ class StoreItemView(View):
             product = get_object_or_404(Medication, slug=slug)
             order = form.save(commit=False)
             order.medication = product
-            order.customer = request.user.customer  # Assign the current user's customer object
-            order.save()
-            # medication.stock_quantity -= fake_order.quantity
-            # product.save()
-            return redirect(reverse('confirmation'))  # Redirect to success page or any other page
+
+            # Check if the user has a customer object
+            if hasattr(request.user, 'customer') and request.user.customer:
+                order.customer = request.user.customer  # Assign the current user's customer object
+                order.save()
+                # medication.stock_quantity -= fake_order.quantity
+                # product.save()
+                return redirect(reverse('confirmation'))  # Redirect to success page or any other page
+            else:
+                # Display an error message indicating the user has no customer object
+                messages.error(request, f'"{request.user}" is not a registered customer.')
+                return redirect(reverse('store-item', kwargs={'slug': slug}))
         else:
             product = get_object_or_404(Medication, slug=slug)
             context = {'product': product, 'form': form}
