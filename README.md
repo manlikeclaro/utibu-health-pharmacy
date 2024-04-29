@@ -22,11 +22,11 @@ In addition to the RESTful API, this project includes a web application with tem
 ## Screens
 
 ### Mobile Application
-![Mobile Application Screenshot](screens/Mobile/login.png)
-![Mobile Application Screenshot](screens/Mobile/home.png)
-![Mobile Application Screenshot](screens/Mobile/store-item-2.png)
-![Mobile Application Screenshot](screens/Mobile/order-confirmation.png)
-![Mobile Application Screenshot](screens/Mobile/orders.png)
+![Mobile Application Screenshot](screenshots/Mobile/login.png)
+![Mobile Application Screenshot](screenshots/Mobile/home.png)
+![Mobile Application Screenshot](screenshots/Mobile/store-item-2.png)
+![Mobile Application Screenshot](screenshots/Mobile/order-confirmation.png)
+![Mobile Application Screenshot](screenshots/Mobile/orders.png)
 
 ### API Documentation
-![API Documentation Screenshot](screens/API/api-documentation.png)
+![API Documentation Screenshot](screenshots/API/api-documentation.png)
