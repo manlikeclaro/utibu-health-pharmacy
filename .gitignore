@@ -1,9 +1,18 @@
 # Virtual environment
-venv/
+.venv/
 .env
 *.env
 
-# Compiled Python files
+# Ignore Django migration files
+**/migrations/
+
+# Ignore database files
+db.sqlite3
+
+# app level static files
+pharmacy/static
+
+# Ignore compiled Python files and cache
 *.pyc
 __pycache__/
 
@@ -11,7 +20,17 @@ __pycache__/
 .vscode/
 .idea/
 
-# Backup and temporary files
+# Dependency management (commonly used virtual environment directories)
+/venv/
+/env/
+/env37/
+/env38/
+/env39/
+/bin/
+/lib/
+/include/
+
+# Ignore backup and temporary files
 *~
 *.swp
 .DS_Store
