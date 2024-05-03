@@ -10,7 +10,7 @@
 db.sqlite3
 
 # app level static files
-pharmacy/static
+pharmacy/static/pharmacy
 
 # Ignore compiled Python files and cache
 *.pyc

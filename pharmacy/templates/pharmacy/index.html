@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    <div class="site-blocks-cover" style="background-image: url('{% static 'phamacy/' %}images/hero_2.jpg');">
+    <div class="site-blocks-cover" style="background-image: url('{% static 'pharmacy/' %}images/hero_2.jpg');">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
@@ -37,7 +37,7 @@
                         	<span class="tag">Sale</span>
                         {% endif %}
                         <a href="{% url 'store-item' product.slug %}">
-                            {#                            <img src="{% static 'phamacy/images/' %}product_01.png" alt="{{ product.name }}"></a>#}
+                            {#                            <img src="{% static 'pharmacy/images/' %}product_01.png" alt="{{ product.name }}"></a>#}
                             <img src="{{ product.medication_image.url }}" alt="{{ product.name }}"></a>
                         <h3 class="text-dark"><a href="{% url 'store-item' product.slug %}">{{ product.name }}</a></h3>
                         <p class="price">
@@ -70,7 +70,7 @@
 
                         <div class="testimony">
                             <blockquote>
-                                <img src="{% static 'phamacy/' %}images/person_1.jpg" alt="Image"
+                                <img src="{% static 'pharmacy/' %}images/person_1.jpg" alt="Image"
                                      class="img-fluid w-25 mb-4 rounded-circle">
                                 <p>"Utibu Health has been a game-changer for me. As someone managing diabetes, having
                                     the convenience of ordering my medications remotely has made a huge difference in my
@@ -83,7 +83,7 @@
 
                         <div class="testimony">
                             <blockquote>
-                                <img src="{% static 'phamacy/' %}images/person_2.jpg" alt="Image"
+                                <img src="{% static 'pharmacy/' %}images/person_2.jpg" alt="Image"
                                      class="img-fluid w-25 mb-4 rounded-circle">
                                 <p>"I can't thank Utibu Health enough for their outstanding service. Being able to
                                     refill my prescriptions without having to visit the doctor's office every time has
@@ -96,7 +96,7 @@
 
                         <div class="testimony">
                             <blockquote>
-                                <img src="{% static 'phamacy/' %}images/person_3.jpg" alt="Image"
+                                <img src="{% static 'pharmacy/' %}images/person_3.jpg" alt="Image"
                                      class="img-fluid w-25 mb-4 rounded-circle">
                                 <p>"Living with HIV, managing my medications is crucial. Utibu Health's mobile app has
                                     simplified the process for me. I can easily track my prescriptions and order refills
@@ -110,7 +110,7 @@
 
                         <div class="testimony">
                             <blockquote>
-                                <img src="{% static 'phamacy/' %}images/person_4.jpg" alt="Image"
+                                <img src="{% static 'pharmacy/' %}images/person_4.jpg" alt="Image"
                                      class="img-fluid w-25 mb-4 rounded-circle">
                                 <p>"Utibu Health has exceeded my expectations in every way. Their commitment to
                                     providing top-notch care and convenience is truly commendable. I've been a customer
@@ -123,7 +123,7 @@
 
                         <div class="testimony">
                             <blockquote>
-                                <img src="{% static 'phamacy/' %}images/person_4.jpg" alt="Image"
+                                <img src="{% static 'pharmacy/' %}images/person_4.jpg" alt="Image"
                                      class="img-fluid w-25 mb-4 rounded-circle">
                                 <p>"I've been a loyal customer of Utibu Health for as long as I can remember, and for
                                     good reason. Their mobile app has revolutionized how I manage my hypertension

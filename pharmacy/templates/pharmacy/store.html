@@ -34,7 +34,7 @@
                         	<span class="tag">Sale</span>
                         {% endif %}
                         <a href="{% url 'store-item' product.slug %}">
-{#                            <img src="{% static 'phamacy/images/' %}{{ product.image }}" alt="Image"></a>#}
+{#                            <img src="{% static 'pharmacy/images/' %}{{ product.image }}" alt="Image"></a>#}
                             <img src="{{ product.medication_image.url }}" alt="Image"></a>
                         <h3 class="text-dark"><a href="{% url 'store-item' product.slug %}">{{ product.name }}</a></h3>
                         <p class="price">
