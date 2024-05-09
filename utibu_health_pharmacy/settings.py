@@ -149,13 +149,3 @@ MPESA_API = {
     "CONSUMER_SECRET": config('CONSUMER_SECRET'),
     "PASS_KEY": config('PASS_KEY'),
 }
-
-# MPESA_API = {
-#     "BIZ_SHORT_CODE": '174379',
-#     "CALLBACK_URL": 'https://a93c-102-140-253-159.ngrok-free.app/pharmacy/mpesa-callback',
-#     "PAYMENT_URL": 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
-#     "CREDENTIALS_URL": 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
-#     "CONSUMER_KEY": 'yEMHYsHPGjo8W6GHvAAYAq6GfVE7wuFdpabdrwJ7USkJTxMN',
-#     "CONSUMER_SECRET": 'KchCdWviooa4X5xYa1d9KBc8wFXuLac9nysqVLKpG4zgUMdeEuRxdHMsKPdvVKG6',
-#     "PASS_KEY": 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-# }
