@@ -1,14 +1,18 @@
+import requests
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
-from django.views.generic import FormView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
+from pharmacy import mpesa
 from pharmacy.forms import LoginForm, CustomUserCreationForm, OrderForm
 from pharmacy.models import Medication, Order, Customer
+from pharmacy.serializers import PaymentSerializer
+from utibu_health_pharmacy import settings
 
 
 # Create your views here.
@@ -151,3 +155,35 @@ class SignUp(View):
             context = {"form": form}
             # return render(request, 'pharmacy/sign-up.html', context)
             return render(request, 'pharmacy/alt-sign-up.html', context)
+
+
+@api_view(['POST'])
+def mpesa_payment(request):
+    serializer = PaymentSerializer(data=request.data)  # {"phone":"254733444555", "amount": 10}
+    if serializer.is_valid(raise_exception=True):
+        phone_number = serializer.validated_data["phone"]
+        amount = serializer.validated_data["amount"]
+        headers = mpesa.generate_request_headers()
+        data = {
+            "BusinessShortCode": mpesa.get_business_shortcode(),
+            "Password": mpesa.generate_password(),
+            "Timestamp": mpesa.get_current_timestamp(),
+            "TransactionType": "CustomerPayBillOnline",
+            "Amount": amount,
+            "PartyA": phone_number,
+            "PartyB": mpesa.get_business_shortcode(),
+            "PhoneNumber": phone_number,
+            "CallBackURL": mpesa.get_callback_url(),
+            "AccountReference": "Utibu Health Pharmacy",
+            "TransactionDesc": "Payment for services"
+        }
+        resp = requests.post(mpesa.get_payment_url(), json=data, headers=headers)
+        print("Response from Safaricom", resp.json())
+        return Response({"message": "Initiated STK push"})
+
+
+@api_view(["POST"])
+def mpesa_callback(request):
+    data = request.data
+    print("Callback from Safaricom", data)
+    return Response({"message": "Received Callback"})

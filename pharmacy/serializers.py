@@ -31,3 +31,8 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = '__all__'
+
+
+class PaymentSerializer(serializers.Serializer):
+    phone = serializers.CharField(max_length=20)  # 254723456789
+    amount = serializers.IntegerField()

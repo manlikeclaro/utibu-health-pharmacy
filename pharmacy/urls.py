@@ -13,6 +13,10 @@ urlpatterns = [
     path('logout', views.sign_out, name='logout'),
     path('sign-up', views.SignUp.as_view(), name='sign-up'),
 
+    # Mpesa api paths
+    path('mpesa-payment', views.mpesa_payment, name='mpesa-payment'),
+    path('mpesa-callback', views.mpesa_callback, name='mpesa-callback'),
+
     # Include API URLs
     path('api/', include('pharmacy.api.urls')),
 ]
